@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.title}}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>VdSYMLinkTool</h1>
+            <p>自动识别视频文件并格式化命名、创建符号链接或移动文件</p>
+        </header>
+
+        <main>
+            <form method="POST" action="/api/process" id="mainForm">
+                <div class="form-group">
+                    <label>操作模式:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="mode" value="link"
+                                   {{if or (not .mode) (eq .mode "link")}}checked{{end}}
+                                   onchange="toggleMode()">
+                            <span class="radio-label">创建符号链接</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="mode" value="move"
+                                   {{if eq .mode "move"}}checked{{end}}
+                                   onchange="toggleMode()">
+                            <span class="radio-label">移动文件</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="mode" value="rename"
+                                   {{if eq .mode "rename"}}checked{{end}}
+                                   onchange="toggleMode()">
+                            <span class="radio-label">格式化命名</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sourceDir">视频目录路径:</label>
+                    <div class="input-with-button">
+                        <input type="text" id="sourceDir" name="sourceDir" required
+                               value="{{.sourceDir}}"
+                               placeholder="请输入视频文件所在目录的完整路径">
+                    </div>
+                </div>
+
+                <div class="form-group" id="targetDirGroup">
+                    <label for="targetDir">目标目录路径:</label>
+                    <div class="input-with-button">
+                        <input type="text" id="targetDir" name="targetDir"
+                               value="{{.targetDir}}"
+                               placeholder="创建符号链接或移动文件时填写">
+                    </div>
+                </div>
+
+                <div class="form-group" id="redirectPathGroup">
+                    <label for="redirectPath">重定向路径 (Docker环境):</label>
+                    <div class="input-with-button">
+                        <input type="text" id="redirectPath" name="redirectPath"
+                               value="{{.redirectPath}}"
+                               placeholder="可选：输入容器内的映射路径">
+                        <span class="help-text">用于Docker环境，将主机路径重定向为容器内路径</span>
+                    </div>
+                </div>
+
+                <button type="submit">开始处理</button>
+            </form>
+
+            {{if .error}}
+            <div class="result-container error">
+                <h3>错误:</h3>
+                <pre>{{.error}}</pre>
+            </div>
+            {{end}}
+
+            {{if .result}}
+            <div class="result-container {{if .success}}success{{else}}error{{end}}">
+                <h3>处理结果:</h3>
+                <pre>{{.result}}</pre>
+            </div>
+            {{end}}
+
+            <div class="instructions">
+                <h3>使用说明:</h3>
+                <ul>
+                    <li><strong>创建符号链接:</strong> 在目标目录创建符号链接，可选择Docker重定向路径</li>
+                    <li><strong>移动文件:</strong> 将文件移动到目标目录</li>
+                    <li><strong>格式化命名:</strong> 在原始目录中直接重命名文件</li>
+                    <li>支持的文件格式: .mkv, .mp4</li>
+                    <li>自动识别季数和集数，格式化为 S01E01 格式</li>
+                    <li><strong>Docker重定向功能:</strong> 在创建符号链接时，可将软链接将指向容器内路径</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/directory-browser.js"></script>
+</body>
+</html>

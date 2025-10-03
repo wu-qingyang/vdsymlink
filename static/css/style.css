@@ -1,0 +1,446 @@
+/* ==================== 基础样式 ==================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    /* 毛玻璃效果背景 */
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* 毛玻璃背景层 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    z-index: -1;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+header p {
+    font-size: 1.1em;
+    opacity: 0.8;
+    color: #5a6c7d;
+}
+
+main {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ==================== 表单样式 ==================== */
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid rgba(236, 240, 241, 0.8);
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 8px;
+}
+
+.radio-label {
+    font-weight: normal;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    background: linear-gradient(135deg, #2980b9, #2471a3);
+}
+
+.result-container {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(248, 249, 250, 0.8);
+    border: 1px solid rgba(233, 236, 239, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.result-container h3 {
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+.result-container pre {
+    white-space: pre-wrap;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(222, 226, 230, 0.6);
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+}
+
+.result-container.success {
+    border-left: 4px solid #27ae60;
+    background: rgba(39, 174, 96, 0.05);
+}
+
+.result-container.error {
+    border-left: 4px solid #e74c3c;
+    background: rgba(231, 76, 60, 0.05);
+}
+
+.instructions {
+    margin-top: 40px;
+    padding: 25px;
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 12px;
+    border-left: 4px solid #3498db;
+    backdrop-filter: blur(5px);
+}
+
+.instructions h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.instructions ul {
+    list-style-position: inside;
+}
+
+.instructions li {
+    margin-bottom: 8px;
+    color: #5a6c7d;
+}
+
+.instructions strong {
+    color: #2c3e50;
+}
+
+.instructions code {
+    background: rgba(52, 152, 219, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: #2980b9;
+}
+
+/* 重定向路径组样式 */
+#redirectPathGroup {
+    display: none;
+}
+
+.help-text {
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 5px;
+    display: block;
+}
+
+/* ==================== 目录浏览器样式 ==================== */
+
+.input-with-button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    position: relative;
+}
+
+.browse-btn {
+    padding: 12px 16px;
+    background: rgba(108, 117, 125, 0.9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.browse-btn:hover {
+    background: rgba(90, 98, 104, 0.9);
+    transform: translateY(-1px);
+}
+
+.directory-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(233, 236, 239, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    z-index: 1000;
+    margin-top: 5px;
+    max-height: 400px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(248, 249, 250, 0.9);
+    border-bottom: 1px solid rgba(233, 236, 239, 0.8);
+}
+
+.dropdown-header .current-path {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #495057;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #3498db;
+    transition: color 0.2s ease;
+}
+
+.dropdown-header .current-path:hover {
+    color: #2980b9;
+    background: rgba(52, 152, 219, 0.1);
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin: -2px -4px;
+}
+
+.close-dropdown {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #6c757d;
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.close-dropdown:hover {
+    background: rgba(233, 236, 239, 0.8);
+}
+
+.dropdown-loading {
+    padding: 20px;
+    text-align: center;
+    color: #6c757d;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.directory-list {
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.directory-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(248, 249, 250, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.15s ease;
+}
+
+.directory-item:hover {
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.directory-item:last-child {
+    border-bottom: none;
+}
+
+.directory-item.parent-directory {
+    background: rgba(248, 249, 250, 0.8);
+    border-bottom: 1px solid rgba(222, 226, 230, 0.8);
+}
+
+.directory-item.parent-directory:hover {
+    background: rgba(222, 226, 230, 0.8);
+}
+
+.directory-item.parent-directory .dir-icon {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.directory-item.parent-directory .dir-desc {
+    color: #6c757d;
+    font-size: 11px;
+    font-style: italic;
+    margin-left: auto;
+}
+
+.dir-icon {
+    font-size: 16px;
+    width: 16px;
+    text-align: center;
+}
+
+.dir-name {
+    color: #495057;
+    font-weight: 500;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+}
+
+.empty, .error {
+    padding: 20px;
+    text-align: center;
+    color: #6c757d;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.error {
+    color: #e74c3c;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .input-with-button {
+        flex-direction: column;
+    }
+
+    .browse-btn {
+        width: 100%;
+        order: 2;
+        margin-top: 8px;
+    }
+
+    .directory-dropdown {
+        position: fixed;
+        top: 50%;
+        left: 10px;
+        right: 10px;
+        transform: translateY(-50%);
+        max-height: 70vh;
+    }
+
+    .directory-item.parent-directory .dir-desc {
+        display: none;
+    }
+}
